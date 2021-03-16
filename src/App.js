@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import Estates from "./components/Estates";
+import EstatesCompare from "./components/EstatesCompare";
+import "./sass/app.scss";
 
 function App() {
+  const [compareIds, setCompareIds] = useState([]);
+
+  useEffect(() => {
+    console.log(compareIds);
+  }, [compareIds]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="header">
+        <h1>Estate Comparison</h1>
+      </div>
+      <button
+        onClick={() => {
+          setCompareIds([]);
+        }}
+      >
+        reset
+      </button>
+      <Estates setCompareIds={setCompareIds} compareIds={compareIds} />
+      {compareIds.length === 2 && <EstatesCompare compareIds={compareIds} />}
     </div>
   );
 }
